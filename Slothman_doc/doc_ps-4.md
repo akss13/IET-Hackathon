@@ -39,7 +39,7 @@ Slothman is built on react native which makes it easily portable to multiple pla
 Few tasks that can be performed with Slothman are:
 
 * Create custom voice commands
-* Have dictonary of given voice commands
+* Establish a dictonary of given voice commands
 * Give numeric values as input
 * Link any application with Slothman to have voice commands
 * Robust voice recognition
