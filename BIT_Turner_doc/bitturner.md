@@ -48,6 +48,7 @@ A few of the things you can do with BIT TURNER :
 
 <br>
 
+## Usage
 ```(bash)
 usage: main.py [-h] [-f FILE] [-t TEMPLATE] [-o OUTPUT] [-g GUI]
 
