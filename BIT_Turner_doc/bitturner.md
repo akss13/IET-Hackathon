@@ -1,7 +1,7 @@
 <h1 align="center"> Bit Turner </h1> <br>
 <p align="center">
   <a href="https://gitpoint.co/">
-    <img alt="GitPoint" title="GitPoint" src="http://i.imgur.com/VShxJHs.png" width="450">
+    <img alt="GitPoint" title="GitPoint" src="./BitTurner.png" width="450">
   </a>
 </p>
 
@@ -9,15 +9,7 @@
   Document Translation simplified. Built with Python.
 </p>
 
-<p align="center">
-  <a href="https://itunes.apple.com/us/app/gitpoint/id1251245162?mt=8">
-    <img alt="Download on the App Store" title="App Store" src="http://i.imgur.com/0n2zqHD.png" width="140">
-  </a>
 
-  <a href="https://play.google.com/store/apps/details?id=com.gitpoint">
-    <img alt="Get it on Google Play" title="Google Play" src="http://i.imgur.com/mtGRPuM.png" width="140">
-  </a>
-</p>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -46,7 +38,7 @@ Extract and translate data from your .xlsx file, provide us with a sample format
 **__Available for Windows, MacOS and  Linux__**
 
 <p align="center">
-  <img src = "http://i.imgur.com/HowF6aM.png" width=350>
+  <img src = "WinLogo.png" width=100>  <img   src = "macOS.png" width=100>   <img src = "tux.png" width=100>
 </p>
 
 ## Features
@@ -71,15 +63,5 @@ A few of the things you can do with GitPoint:
   <img src = "http://i.imgur.com/0iorG20.png" width=700>
 </p>
 
-
-<br>
-
-
-## Backers
-
-
-Thank you to all our contributors! 
-
-<a href="https://opencollective.com/git-point#backers" target="_blank"><img src="https://opencollective.com/git-point/backers.svg?width=890"></a>
 
 
