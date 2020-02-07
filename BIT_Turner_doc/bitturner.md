@@ -48,5 +48,21 @@ A few of the things you can do with BIT TURNER :
 
 <br>
 
+```(bash)
+usage: main.py [-h] [-f FILE] [-t TEMPLATE] [-o OUTPUT] [-g GUI]
+
+Convert Excel Sheet(.xlsx) to Word Document(.docx) based on Template
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -f FILE, --file FILE  Excel File Path (.xlsx)
+  -t TEMPLATE, --template TEMPLATE
+                        Template for Conversion (.docx)
+  -o OUTPUT, --output OUTPUT
+                        Output File Name (.docx)
+  -g GUI, --gui GUI     Start in GUI Mode
+  ```
+
 <h4><p align="center">Copyright @ BITS PLEASE </p></h4>
+
 
