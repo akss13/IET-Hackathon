@@ -12,9 +12,6 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Contributors](#contributors)
-- [Build Process](#build-process)
-- [Acknowledgments](#acknowledgments)
 
 ## Introduction
 
