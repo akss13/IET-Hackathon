@@ -15,6 +15,7 @@ class Experiment:
         num_rows = len(df)
         for i in range(exp_begin_row, num_rows):
             if str(df.loc[i]['Experiment ID']) != 'nan' and i != exp_begin_row:
-                print('breaking', i)
                 break
-            self.parsed_data['Procedure'].append(df.loc[i]['Procedure'])
+            procedure = list((df.loc[i]['Procedure'], df.loc[i]['Expected Value'] if str(
+                df.loc[i]['Expected Value']) != 'nan' else None))
+            self.parsed_data['Procedure'].append(procedure)
