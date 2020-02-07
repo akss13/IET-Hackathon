@@ -7,13 +7,25 @@ from experiment import Experiment
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL
-from flask import Flask, render_template, send_file, flash, request, redirect, url_for
-from werkzeug.utils import secure_filename
+# from flask import Flask, render_template, send_file, flash, request, redirect, url_for, Response
+# from werkzeug.utils import secure_filename
+from tkinter import filedialog
+from tkinter import *
+from tkinter import ttk
 
-UPLOAD_FOLDER = './uploads'
-app = Flask(__name__) 
-app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
+def getFilePath(type, ):
+    filename = filedialog.askopenfilename(
+        initialdir="/", title="Select file", filetypes=type)
+    print(root.filename)
+
+
+def getSavePath():
+    out_path = filedialog.asksaveasfile(mode='w', defaultextension=".docx")
+
+
+FONT = ("Myriad Pro", 13)
+LARGE_FONT = ("Myriad Pro", 30)
 
 keys = {'Exp. Title': None, 'Exp. reference ': [1, 1], 'Author Comments': [1, 2], 'Formula Used': [1, 4], 'TestGoal': [1, 9], 'TestMeans': None,
         'Date': [4, 1], 'Author': [4, 2], 'TestMethod': None, 'Testtype': None, 'ExpStatus': None, 'Conclusion': None}
@@ -135,33 +147,7 @@ ALLOWED_EXTENSIONS = {'docx', 'xlsx'}
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-@app.route('/')
-def home():
-    return render_template('upload.html')
-
-
-@app.route('/download')
-def download_file():
-	path = "out/sample.txt"
-	return send_file(path, as_attachment=True)
-
-
-@app.route('/upload/<file>', methods=['GET', 'POST'])
-def upload_file(file):
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return redirect(url_for('uploaded_file',
-                                    filename=filename))
+        
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser(
         description='Convert Excel Sheet(.xlsx) to Word Document(.docx) based on Template')
@@ -190,5 +176,20 @@ if __name__ == '__main__':
     if args.gui == None:
         convert(args)
     else:
-        app.run(host='0.0.0.0', port=args.gui)
+        root = Tk()
+        l1 = Label(root, text="Excel to Docx Parser", font=LARGE_FONT)
+        l1.grid(row=0, column=1, sticky=W, pady=20)
+
+        root.geometry('600x300')
+        template_btn = ttk.Button(
+            root, text="Choose Template", command=lambda: getFilePath((("docx file", "*.docx"), ("all files", "*.*"))), width=10)
+        excel_btn = ttk.Button(
+            root, text="Choose Excel File", command=lambda: getFilePath((("excel sheet", "*.xlsx"), ("all files", "*.*"))), width=10)
+        parse_btn = ttk.Button(
+            root, text="Parse", command=lambda: getSavePath(), width=10)
+        template_btn.grid(row=1, column=0, sticky=W, pady=100, padx=10)
+        excel_btn.grid(row=1, column=1, sticky=W, pady=100, padx=100)
+        parse_btn.grid(row=1, column=2, sticky=W, pady=100)
+        # template_btn.pack(side='top')
+        root.mainloop()
     
