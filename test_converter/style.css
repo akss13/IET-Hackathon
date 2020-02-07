@@ -1,22 +1,40 @@
 body {
     font-family: sans-serif;
     background-color: #eeeeee;
-  }
-  
-  .file-upload_d {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 50px;
+    padding-top: 100px;
+}
+
+h.head {
+    color: white;
+    font-family: 'Archivo', sans-serif;
+    font-size: 30px;
+    padding-left: 50px;
+}
+
+.header {
+    height: 40px;
+    width: 100%;
+    overflow: hidden;
+    background-color: #0a091e;
+    padding-top: 15px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.file-upload {
     background-color: #ffffff;
     width: 600px;
     margin: 0 auto;
     padding: 20px;
-  }
-  .file-upload_x {
-    background-color: #ffffff;
-    width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  .file-upload-btn_d {
+}
+
+.file-upload-btn {
     width: 100%;
     margin: 0;
     color: #fff;
@@ -29,177 +47,77 @@ body {
     outline: none;
     text-transform: uppercase;
     font-weight: 700;
-  }
-  .file-upload-btn_x {
-    width: 100%;
-    margin: 0;
-    color: #fff;
-    background: #1FB264;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    border-bottom: 4px solid #15824B;
-    transition: all .2s ease;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-  
-  .file-upload-btn_d:hover {
+}
+
+.file-upload-btn:hover {
     background: #1AA059;
     color: #ffffff;
     transition: all .2s ease;
     cursor: pointer;
-  }
-  
-  .file-upload-btn_d:active {
+}
+
+.file-upload-btn:active {
     border: 0;
     transition: all .2s ease;
-  }
-  
-  .file-upload-content_d {
+}
+
+.file-upload-content-1 {
     display: none;
     text-align: center;
-  }
-  
-  .file-upload-input_x {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    opacity: 0;
-    cursor: pointer;
-  }
+}
 
-  .file-upload-btn_x:hover {
-    background: #1AA059;
-    color: #ffffff;
-    transition: all .2s ease;
-    cursor: pointer;
-  }
-  
-  .file-upload-btn_x:active {
-    border: 0;
-    transition: all .2s ease;
-  }
-  
-  .file-upload-content_x{
+.file-upload-content-2 {
     display: none;
     text-align: center;
-  }
-  
-  .file-upload-input_d {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    opacity: 0;
-    cursor: pointer;
-  }
-  
-  .file-upload-input_x {
-    position: absolute;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    outline: none;
-    opacity: 0;
-    cursor: pointer;
-  }
+}
 
-  .doc-upload-wrap {
+.file-upload-input {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    outline: none;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.doc-upload-wrap {
     margin-top: 20px;
     border: 4px dashed #1FB264;
     position: relative;
-  }
-  
-  .doc-dropping,
-  .doc-upload-wrap:hover {
+}
+
+.doc-dropping,
+.doc-upload-wrap:hover {
     background-color: #1FB264;
     border: 4px dashed #ffffff;
-  }
-  
+}
 
-  .xlsx-upload-wrap {
-    margin-top: 20px;
-    border: 4px dashed #1FB264;
-    position: relative;
-  }
-  
-  .xlsx-dropping,
-  .xlsx-upload-wrap:hover {
-    background-color: #1FB264;
-    border: 4px dashed #ffffff;
-  }
-  
-  .doc-title-wrap {
+.doc-title-wrap {
     padding: 0 15px 15px 15px;
     color: #222;
-  }
+}
 
-  .xlsx-title-wrap {
-    padding: 0 15px 15px 15px;
-    color: #222;
-  }
-  
-  
-  .drag-text {
+.drag-text {
     text-align: center;
-  }
-  
-  .drag-text h3 {
+}
+
+.drag-text h3 {
     font-weight: 100;
     text-transform: uppercase;
     color: #15824B;
     padding: 60px 0;
-  }
-  
-  .file-upload-doc{
-    max-height: 200px;
-    max-width: 200px;
-    margin: auto;
-    padding: 20px;
-  }
-  .file-upload-xlsx{
-    max-height: 200px;
-    max-width: 200px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  .remove-doc {
-    width: 200px;
-    margin: 0;
-    color: #fff;
-    background: #cd4535;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    border-bottom: 4px solid #b02818;
-    transition: all .2s ease;
-    outline: none;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-  
-  .remove-doc:hover {
-    background: #c13b2a;
-    color: #ffffff;
-    transition: all .2s ease;
-    cursor: pointer;
-  }
-  
-  .remove-doc:active {
-    border: 0;
-    transition: all .2s ease;
-  }
+}
 
-  .remove-xlsx {
+.file-upload-doc {
+    max-height: 200px;
+    max-width: 200px;
+    margin: auto;
+    padding: 20px;
+}
+
+.remove-doc {
     width: 200px;
     margin: 0;
     color: #fff;
@@ -212,16 +130,53 @@ body {
     outline: none;
     text-transform: uppercase;
     font-weight: 700;
-  }
-  
-  .remove-xlsx:hover {
+}
+
+.remove-doc:hover {
     background: #c13b2a;
     color: #ffffff;
     transition: all .2s ease;
     cursor: pointer;
-  }
-  
-  .remove-xlsx:active {
+}
+
+.remove-doc:active {
     border: 0;
     transition: all .2s ease;
-  }
+}
+
+.submit-when-uploaded-1 {
+    display: none;
+    text-align: center;
+}
+
+.submit-when-uploaded-2 {
+    display: none;
+    text-align: center;
+}
+
+.send-file {
+    width: 200px;
+    margin: 0;
+    color: #fff;
+    background: #cd4535;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    border-bottom: 4px solid #b02818;
+    transition: all .2s ease;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.send-file:hover {
+    background: #c13b2a;
+    color: #ffffff;
+    transition: all .2s ease;
+    cursor: pointer;
+}
+
+.send-file:active {
+    border: 0;
+    transition: all .2s ease;
+}
