@@ -13,15 +13,24 @@ from tkinter import filedialog
 from tkinter import *
 from tkinter import ttk
 
-
-def getFilePath(type, ):
-    filename = filedialog.askopenfilename(
+global in_file, in_temp_file, out_file 
+def getFilePath(type, file):
+    global in_file, in_temp_file
+    val = filedialog.askopenfilename(
         initialdir="/", title="Select file", filetypes=type)
-    print(root.filename)
+    if file == 'doc':
+        in_temp_file = val
+    else:
+        in_file = val
 
 
 def getSavePath():
-    out_path = filedialog.asksaveasfile(mode='w', defaultextension=".docx")
+    global out_file, in_file, in_temp_file
+    out_file = filedialog.asksaveasfile(mode='w', defaultextension=".docx")
+    print(in_temp_file, out_file)
+    # import pdb; pdb.set_trace()
+    out_file = str(out_file.name)
+    convert(None, in_file, in_temp_file, out_file)
 
 
 FONT = ("Myriad Pro", 13)
@@ -182,9 +191,9 @@ if __name__ == '__main__':
 
         root.geometry('600x300')
         template_btn = ttk.Button(
-            root, text="Choose Template", command=lambda: getFilePath((("docx file", "*.docx"), ("all files", "*.*"))), width=10)
+            root, text="Choose Template", command=lambda: getFilePath((("docx file", "*.docx"), ("all files", "*.*")), 'doc'), width=10)
         excel_btn = ttk.Button(
-            root, text="Choose Excel File", command=lambda: getFilePath((("excel sheet", "*.xlsx"), ("all files", "*.*"))), width=10)
+            root, text="Choose Excel File", command=lambda: getFilePath((("excel sheet", "*.xlsx"), ("all files", "*.*")), 'xl'), width=10)
         parse_btn = ttk.Button(
             root, text="Parse", command=lambda: getSavePath(), width=10)
         template_btn.grid(row=1, column=0, sticky=W, pady=100, padx=10)
