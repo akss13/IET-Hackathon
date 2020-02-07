@@ -1,4 +1,4 @@
-<h1 align="center"> Bit Turner </h1> <br>
+__<h1 align="center"> Bit Turner </h1> <br>__
 <p align="center">
   <a href="https://gitpoint.co/">
     <img alt="GitPoint" title="GitPoint" src="./BitTurner.png" width="450">
@@ -17,9 +17,6 @@
 
 - [Introduction](#introduction)
 - [Features](#features)
-- [Contributors](#contributors)
-- [Build Process](#build-process)
-- [Acknowledgments](#acknowledgments)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -43,25 +40,13 @@ Extract and translate data from your .xlsx file, provide us with a sample format
 
 ## Features
 
-A few of the things you can do with GitPoint:
+A few of the things you can do with BIT TURNER :
 
-* View user activity feed
-* Communicate on your issue and pull request conversations
-* Close or lock issues
-* Apply labels and assignees
-* Review and merge pull requests
-* Create new issues
-* Star, watch and fork repositories
-* Control your unread and participating notifications
-* Easily search for any user or repository
+* _Seamless and hassle free end-user experience_
+* _Added functionality of rapid prototyping to enhance documents' integration_
+* _Control your editings and rest assured that the integration will be robust and accurate_
 
-<p align="center">
-  <img src = "http://i.imgur.com/IkSnFRL.png" width=700>
-</p>
+<br>
 
-<p align="center">
-  <img src = "http://i.imgur.com/0iorG20.png" width=700>
-</p>
-
-
+<h4><p align="center">Copyright @ BITS PLEASE </p></h4>
 
