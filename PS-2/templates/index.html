@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/style.css" />
+    <script type="text/javascript" src="{{ url_for('static', filename='index.js') }}"></script>
+    <title>Bit Turner</title>
+    <div class="header">
+        <h class="head">BIT TURNER</h>
+    </div>
+</head>
+
+<body>
+    <div class="container">
+        <div class="file-upload">
+            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add .docx
+      file</button>
+
+            <div class="doc-upload-wrap">
+                <input class="file-upload-input" type='file' onchange="readURL_1(this);" accept=".doc, .docx" />
+                <div class="drag-text">
+                    <h3>Drag and drop a file or select one</h3>
+                </div>
+            </div>
+            <div class="file-upload-content-1">
+                <img class="file-upload-doc" src="#" alt="your .docx file" />
+                <div class="doc-title-wrap">
+                    <button type="button" onclick="removeUpload_1()" class="remove-doc">Remove <span class="image-title">Uploaded
+            .docx file</span></button>
+                </div>
+            </div>
+
+            <div class="submit-when-uploaded-1">
+                <button type="button" onclick="executeOperation()" class="send-file">Send <span class="image-title">Uploaded
+          Image</span></button>
+            </div>
+        </div>
+
+        <div class="file-upload">
+            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add .xlsx
+      file</button>
+
+            <div class="doc-upload-wrap">
+                <input class="file-upload-input" type='file' onchange="readURL_2(this);" accept=".application/vnd.ms-excel, .application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <div class="drag-text">
+                    <h3>Drag and drop a file or select one</h3>
+                </div>
+            </div>
+
+            <div class="file-upload-content-2">
+                <img class="file-upload-doc" src="#" alt="your .xlsx file" />
+                <div class="doc-title-wrap">
+                    <button type="button" onclick="removeUpload_2()" class="remove-doc">Remove <span class="image-title">Uploaded
+            .xlsx file</span></button>
+                </div>
+            </div>
+
+            <div class="submit-when-uploaded-2">
+                <button type="button" onclick="executeOperation()" class="send-file">Send <span class="image-title">Uploaded
+          Image</span></button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -7,6 +7,13 @@ from experiment import Experiment
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.enum.table import WD_TABLE_ALIGNMENT
 from docx.enum.table import WD_ALIGN_VERTICAL
+from flask import Flask, render_template, send_file, flash, request, redirect, url_for
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = './uploads'
+app = Flask(__name__) 
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 
 keys = {'Exp. Title': None, 'Exp. reference ': [1, 1], 'Author Comments': [1, 2], 'Formula Used': [1, 4], 'TestGoal': [1, 9], 'TestMeans': None,
         'Date': [4, 1], 'Author': [4, 2], 'TestMethod': None, 'Testtype': None, 'ExpStatus': None, 'Conclusion': None}
@@ -17,42 +24,23 @@ exp_status_options = {'Select Test Status', 'InProgress', 'Done', 'Reviewed'}
 exp_type_options = {'Select Test Type', 'Type1', 'Type2', 'Type3'}
 exp_conclusion_options = {'OK', 'NOK', 'NOT DONE'}
 
-if __name__ == '__main__':
-    arg_parser = argparse.ArgumentParser(
-        description='Convert Excel Sheet(.xlsx) to Word Document(.docx) based on Template')
 
-    arg_parser.add_argument('-f', '--file',
-                            help='Excel File Path (.xlsx)',
-                            required=True,
-                            default=None)
+def convert(args=None, file_path=None, template_path=None, out_path=None):
+    if args is not None:
+        if args.file == None and args.template == None:
+            print('ERROR :: Plesae specify path for excel file and template file\n\n')
+            argparse.ArgumentParser.print_help(arg_parser)
+            sys.exit(1)
 
-    arg_parser.add_argument('-t', '--template',
-                            help='Template for Conversion (.docx)',
-                            required=True,
-                            default=None)
+        if '.docx' != args.template[-5:] or '.xlsx' != args.file[-5:] or ('.docx' != args.output[-5:] if args.output != None else False):
+            print('ERROR :: Invalid input file type\n\n')
+            argparse.ArgumentParser.print_help(arg_parser)
+            sys.exit(1)
 
-    arg_parser.add_argument('-o', '--output',
-                            help='Output File Name (.docx)',
-                            required=False,
-                            default=None)
-
-    args = sys.argv[1:]
-    args = arg_parser.parse_args(args)
-
-    if args.file == None and args.template == None:
-        print('ERROR :: Plesae specify path for excel file and template file\n\n')
-        argparse.ArgumentParser.print_help(arg_parser)
-        sys.exit(1)
-
-    if '.docx' != args.template[-5:] or '.xlsx' != args.file[-5:] or ('.docx' != args.output[-5:] if args.output != None else False):
-        print('ERROR :: Invalid input file type\n\n')
-        argparse.ArgumentParser.print_help(arg_parser)
-        sys.exit(1)
-
-    file_path = os.path.expanduser(args.file)
-    template_path = args.template
-    out_path = args.output if args.output != None else file_path.split('.')[
-        0] + '.docx'
+        file_path = os.path.expanduser(args.file)
+        template_path = args.template
+        out_path = args.output if args.output != None else file_path.split('.')[
+            0] + '.docx'
 
     df = pd.read_excel(file_path)
     template_doc = docx.Document(template_path)
@@ -68,7 +56,7 @@ if __name__ == '__main__':
     for para in template_doc.paragraphs:
         if 'title' in para.text:
             titles[para] = None
-    
+
     if len(template_doc.tables) != len(titles.keys())*2:
         print('ERROR :: The number of tables in the template does not corrosponds to number of experiment titles\nNumber of Titles :{}\nNumber of Expected Tables :{}\nNumber of Actual Tables :{}'.format(
             len(titles), len(titles)*2, len(template_doc.tables)))
@@ -87,9 +75,10 @@ if __name__ == '__main__':
                 val = parsed[exp][key] if not isinstance(
                     parsed[exp][key], pd._libs.tslibs.timestamps.Timestamp) else (str(parsed[exp][key].day) + '/' + str(parsed[exp][key].month) + '/' + str(parsed[exp][key].year))
                 # print(val)
-                titles[title][0].column_cells(keys[key][0])[keys[key][1]].text = val
+                titles[title][0].column_cells(keys[key][0])[
+                    keys[key][1]].text = val
             except:
-                print('Error Occured', title,key,
+                print('Error Occured', title, key,
                       keys[key][0], keys[key][1], parsed[exp][key])
         description_summary = ''
         for p in parsed[exp]['Procedure']:
@@ -97,7 +86,8 @@ if __name__ == '__main__':
         # print(description_summary)
 
         titles[title][0].column_cells(1)[10].text = ''
-        desc_para = titles[title][0].column_cells(1)[10].add_paragraph(description_summary)
+        desc_para = titles[title][0].column_cells(
+            1)[10].add_paragraph(description_summary)
         desc_para.alignment = WD_ALIGN_PARAGRAPH.LEFT
         # print(titles[title][1].row_cells(0)[0].text)
         titles[title][1].autofit = True
@@ -129,13 +119,76 @@ if __name__ == '__main__':
                 row.cells[4].text = ''
                 row.cells[3].merge(row.cells[4])
                 titles[title][1].rows[j]._tr.addnext(row._tr)
-                print('IndexError')
-            j+=1
-            s_no += 1 
+                # print('IndexError')
+            j += 1
+            s_no += 1
         title.text = parsed[exp]['Exp. Title']
         titles[title][0].column_cells(2)[6].text = ''
         titles[title][0].column_cells(2)[7].text = ''
         titles[title][0].column_cells(2)[8].text = ''
         titles[title][0].column_cells(4)[7].text = ''
-
     template_doc.save(out_path)
+
+
+ALLOWED_EXTENSIONS = {'docx', 'xlsx'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/')
+def home():
+    return render_template('upload.html')
+
+
+@app.route('/download')
+def download_file():
+	path = "out/sample.txt"
+	return send_file(path, as_attachment=True)
+
+
+@app.route('/upload/<file>', methods=['GET', 'POST'])
+def upload_file(file):
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('uploaded_file',
+                                    filename=filename))
+if __name__ == '__main__':
+    arg_parser = argparse.ArgumentParser(
+        description='Convert Excel Sheet(.xlsx) to Word Document(.docx) based on Template')
+
+    arg_parser.add_argument('-f', '--file',
+                            help='Excel File Path (.xlsx)',
+                            required=False,
+                            default=None)
+
+    arg_parser.add_argument('-t', '--template',
+                            help='Template for Conversion (.docx)',
+                            required=False,
+                            default=None)
+
+    arg_parser.add_argument('-o', '--output',
+                            help='Output File Name (.docx)',
+                            required=False,
+                            default=None)
+    arg_parser.add_argument('-g', '--gui',
+                            help='Start in GUI Mode',
+                            required=False,
+                            default=None)
+
+    args = sys.argv[1:]
+    args = arg_parser.parse_args(args)
+    if args.gui == None:
+        convert(args)
+    else:
+        app.run(host='0.0.0.0', port=args.gui)
+    
