@@ -12,9 +12,11 @@
 
 **Submission for problem statement-2:**
 <br>
-* [Documentation](https://github.com/akss13/IET-Hackathon/blob/master/BIT_Turner_doc/bitturner.md)
+
+- [Documentation](https://github.com/akss13/IET-Hackathon/blob/master/BIT_Turner_doc/bitturner.md)
 
 **Submission for problem statement-4:**
 
-* [Documentation](https://github.com/akss13/IET-Hackathon/blob/master/Slothman_doc/doc_ps-4.md)
+- [Documentation](https://github.com/akss13/IET-Hackathon/blob/master/Slothman_doc/doc_ps-4.md)
 
+Copyright Team@BitsPlease
